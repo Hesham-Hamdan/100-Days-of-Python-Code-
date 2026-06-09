@@ -38,3 +38,37 @@ def completing_user_hand(yours, comp):
             print(f"Computer's first card: {comp}")
         else:
             completing_computer_hand(comp, yours, black_jack)
+
+
+def black_jack():
+    while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
+        your_cards = [
+            generate_card(),
+            generate_card(),
+        ]
+        computer_cards = [generate_card()]
+        print(f"Your cards: {your_cards} , current score = {sum(your_cards)}")
+        print(f"Computer's first card: {computer_cards}")
+
+        completing_user_hand(your_cards, computer_cards)
+
+        if sum(your_cards) == 21:
+            if len(your_cards) == 2:
+                print(f"Your final hand: {your_cards} , final score = 0")
+                print(
+                    f"Computer's final hand: {computer_cards}, final score = {sum(computer_cards)}"
+                )
+                print("You won with a Blackjack")
+            else:
+                completing_computer_hand(computer_cards, your_cards, black_jack)
+
+        else:
+
+            print(f"Your final cards: {your_cards} , final score = {sum(your_cards)}")
+            print(
+                f"Computer's final cards: {computer_cards}, final score = {sum(computer_cards)}"
+            )
+            print("You went over, you lose")
+
+
+black_jack()
