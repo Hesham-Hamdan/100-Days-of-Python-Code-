@@ -24,3 +24,17 @@ def completing_computer_hand(comp, yours, func):
     else:
         print("It's a draw")
     func()
+
+
+def completing_user_hand(yours, comp):
+    while sum(yours) < 21:
+        another_card = input("Type 'y' to get another card, type 'n' to pass:")
+        if another_card == "y":
+            if 11 in yours and sum(yours) > 21:
+                yours.remove(11)
+                yours.append(1)
+            yours.append(generate_card())
+            print(f"Your cards: {yours} , current score = {sum(yours)}")
+            print(f"Computer's first card: {comp}")
+        else:
+            completing_computer_hand(comp, yours, black_jack)
