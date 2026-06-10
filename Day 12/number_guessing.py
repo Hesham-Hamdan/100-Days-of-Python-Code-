@@ -16,16 +16,22 @@ else:
 guess = 0
 
 
-while guess != number and attemps > 0:
-    print(f"You have {attemps} attemps remaining to guess the number.")
-    guess = int(input("Make a guess: "))
-    if guess == number:
+def compare_two_nums(num1, num2):
+    if num1 == num2:
         print("You won")
-        break
-    elif guess > number:
+        return
+    elif num1 > num2:
         print("Too high")
     else:
         print("Too low")
+
+
+while guess != number and attemps > 0:
+    print(f"You have {attemps} attemps remaining to guess the number.")
+    guess = int(input("Make a guess: "))
+
+    compare_two_nums(guess, number)
+
     attemps -= 1
     if attemps > 0:
         print("Guess again")
