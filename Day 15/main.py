@@ -57,3 +57,14 @@ def print_report(resources):
             print(f"${resources[key]}")
         else:
             print(f"{resources[key]}ml")
+
+
+def check_resources(resources, order):
+    new_resources = resources
+    new_resources = change_resources(order, resources)
+    for key in new_resources:
+        if new_resources[key] <= 0 and key != "money":
+            print(f" Sorry there is not enough {key}.")
+            return
+        else:
+            return True
