@@ -47,3 +47,13 @@ def change_resources(order, resources):
     }
 
     return changed
+
+
+def print_report(resources):
+    for key in resources:
+        if key == "coffee":
+            print(f"{resources[key]}g")
+        elif key == "money":
+            print(f"${resources[key]}")
+        else:
+            print(f"{resources[key]}ml")
