@@ -68,3 +68,18 @@ def check_resources(resources, order):
             return
         else:
             return True
+
+
+def check_pay(order, prices):
+    print("Please insert coins")
+    quarters = int(input("How many quarters? "))
+    dimes = int(input("How many dimes? "))
+    nickles = int(input("How many nickles? "))
+    pennies = int(input("How many pennies? "))
+
+    pay = quarters * 0.25 + dimes * 0.1 + nickles * 0.05 + pennies * 0.01
+    if prices[order]["cost"] > pay:
+        print("Sorry that's not enough money. Money refunded.")
+    else:
+        change = round(pay - prices[order]["cost"], 2)
+        print(f"Here is ${change} change.\nHere is your {order} Enjoy")
