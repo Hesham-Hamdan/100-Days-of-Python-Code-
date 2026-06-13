@@ -83,3 +83,17 @@ def check_pay(order, prices):
     else:
         change = round(pay - prices[order]["cost"], 2)
         print(f"Here is ${change} change.\nHere is your {order} Enjoy")
+
+
+def ordering(resources, prices):
+    continue_ordering = True
+    while continue_ordering:
+        order = input("What would you like? (espresso/latte/cappuccino): ")
+        if order == "report":
+            print_report(resources)
+        elif order == "off":
+            continue_ordering = False
+        else:
+            if check_resources(resources, order):
+                check_pay(order, prices)
+                resources = change_resources(order, resources)
