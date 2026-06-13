@@ -97,3 +97,21 @@ def ordering(resources, prices):
             if check_resources(resources, order):
                 check_pay(order, prices)
                 resources = change_resources(order, resources)
+
+
+def serving():
+    initial_resources = {
+        "water": 300,
+        "milk": 200,
+        "coffee": 100,
+        "money": 0.0,
+    }
+    PRICES = {
+        "espresso": {"cost": 1.5},
+        "latte": {"cost": 2.5},
+        "cappuccino": {"cost": 3.0},
+    }
+    ordering(initial_resources, PRICES)
+
+
+serving()
