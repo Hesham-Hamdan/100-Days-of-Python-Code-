@@ -20,3 +20,6 @@ class QuizBrain:
             f"Q:{self.question_num} {question.text}: (True/False): "
         ).lower()
         self.check_answer(user_answer, question.answer.lower())
+
+    def still_has_questions(self):
+        return self.question_num < len(self.question_list)
