@@ -1,6 +1,6 @@
 from turtle import Turtle, Screen
 import random
-
+import turtle
 
 t = Turtle()
 # t.shape("turtle")
@@ -31,14 +31,34 @@ colours = [
 # challenge 4
 
 
-angles = [0, 90, 180, 270, 360]
-t.speed("fastest")
-for num in range(0, 100):
-    t.pencolor(random.choice(colours))
-    t.right(random.choice(angles))
-    t.forward(20)
-    t.pensize(t.pensize() + 0.1)
+# angles = [0, 90, 180, 270, 360]
+# t.speed("fastest")
+# for num in range(0, 100):
+#     t.pencolor(random.choice(colours))
+#     t.right(random.choice(angles))
+#     t.forward(20)
+#     t.pensize(t.pensize() + 0.1)
 
+
+# challenge 5
+
+turtle.colormode(255)
+
+
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+
+    return (r, g, b)
+
+
+t.speed("fastest")
+
+for num in range(0, 72):
+    t.pencolor(random_color())
+    t.circle(100)
+    t.right(5)
 
 screen = Screen()
 
