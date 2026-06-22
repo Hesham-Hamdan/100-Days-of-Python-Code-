@@ -35,5 +35,9 @@ while game_is_on:
         scoreboard.update_score(score)
         snake.extend()
 
+    if abs(snake.head.xcor()) > 280 or abs(snake.head.ycor()) > 280:
+        scoreboard.game_over()
+        game_is_on = False
+
 
 screen.exitonclick()
