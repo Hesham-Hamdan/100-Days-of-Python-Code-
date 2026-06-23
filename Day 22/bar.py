@@ -11,3 +11,7 @@ class Bar(Turtle):
         self.goto(position_x, 0)
         self.speed("fastest")
         self.setheading(90)
+
+    def up(self):
+        self.setheading(90)
+        self.forward(20)
