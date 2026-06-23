@@ -15,3 +15,7 @@ class Bar(Turtle):
     def up(self):
         self.setheading(90)
         self.forward(20)
+
+    def down(self):
+        self.setheading(270)
+        self.forward(20)
