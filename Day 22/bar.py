@@ -19,3 +19,9 @@ class Bar(Turtle):
     def down(self):
         self.setheading(270)
         self.forward(20)
+
+    def bounce(self):
+        if 300 - self.ycor() < 30:
+            self.down()
+        elif 300 - self.ycor() > 540:
+            self.up()
