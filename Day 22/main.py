@@ -18,7 +18,10 @@ right_bar = Bar(370)
 game_is_on = True
 
 screen.listen()
-
+screen.onkey(key="Up", fun=right_bar.up)
+screen.onkey(key="Down", fun=right_bar.down)
+screen.onkey(key="w", fun=left_bar.up)
+screen.onkey(key="s", fun=left_bar.down)
 
 while game_is_on:
     time.sleep(0.1)
