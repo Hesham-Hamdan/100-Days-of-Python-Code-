@@ -28,6 +28,8 @@ while game_is_on:
     screen.update()
     left_bar.forward(20)
     right_bar.forward(20)
+    right_bar.bounce()
+    left_bar.bounce()
 
 
 screen.exitonclick()
