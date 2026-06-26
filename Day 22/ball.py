@@ -34,3 +34,8 @@ class Ball(Turtle):
             # self.setheading(new_heading)
             self.x_move *= -1
             self.move_speed *= 0.9
+
+    def reset(self):
+        self.home()
+        self.wall_bounce()
+        self.move_speed = 0.1
