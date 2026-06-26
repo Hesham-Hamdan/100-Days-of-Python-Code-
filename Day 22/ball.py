@@ -27,3 +27,10 @@ class Ball(Turtle):
             # new_heading = 360 - self.heading()
             # self.setheading(new_heading)
             self.y_move *= -1
+
+    def bar_bounce(self, bar):
+        if self.distance(bar) < 80 and (self.xcor() > 320 or self.xcor() < -320):
+            # new_heading = 90 + self.heading()
+            # self.setheading(new_heading)
+            self.x_move *= -1
+            self.move_speed *= 0.9
