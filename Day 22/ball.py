@@ -21,3 +21,9 @@ class Ball(Turtle):
         new_x = self.xcor() + self.x_move
         new_y = self.ycor() + self.y_move
         self.goto(new_x, new_y)
+
+    def wall_bounce(self):
+        if self.ycor() > 280 or self.ycor() < -280:
+            # new_heading = 360 - self.heading()
+            # self.setheading(new_heading)
+            self.y_move *= -1
