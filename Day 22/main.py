@@ -35,6 +35,8 @@ while game_is_on:
     left_bar.bounce()
     ball.move()
     ball.wall_bounce()
+    ball.bar_bounce(left_bar)
+    ball.bar_bounce(right_bar)
 
 
 screen.exitonclick()
