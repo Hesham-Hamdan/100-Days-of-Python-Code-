@@ -37,6 +37,11 @@ while game_is_on:
     ball.wall_bounce()
     ball.bar_bounce(left_bar)
     ball.bar_bounce(right_bar)
+    if ball.xcor() > 390:
+        ball.reset()
+
+    if ball.xcor() < -390:
+        ball.reset()
 
 
 screen.exitonclick()
