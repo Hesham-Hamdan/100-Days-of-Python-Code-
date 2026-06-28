@@ -2,7 +2,7 @@ import time
 from turtle import Screen
 from bar import Bar
 from splitter import Splitter
-
+from scoreboard import Scoreboard
 from ball import Ball
 
 
@@ -16,6 +16,10 @@ splitter = Splitter()
 left_bar = Bar(-370)
 right_bar = Bar(370)
 ball = Ball()
+left_scoreboard = Scoreboard(-100)
+right_scoreboard = Scoreboard(100)
+left_score = 0
+right_score = 0
 
 
 game_is_on = True
@@ -39,9 +43,12 @@ while game_is_on:
     ball.bar_bounce(right_bar)
     if ball.xcor() > 390:
         ball.reset()
-
+        left_score += 1
+        left_scoreboard.update_score(left_score)
     if ball.xcor() < -390:
         ball.reset()
+        right_score += 1
+        right_scoreboard.update_score(right_score)
 
 
 screen.exitonclick()
