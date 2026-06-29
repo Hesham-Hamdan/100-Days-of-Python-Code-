@@ -10,3 +10,6 @@ class Player(Turtle):
     def __init__(self):
         super().__init__()
         self.shape("turtle")
+
+    def up(self):
+        self.forward(MOVE_DISTANCE)
