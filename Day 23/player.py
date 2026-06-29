@@ -10,6 +10,12 @@ class Player(Turtle):
     def __init__(self):
         super().__init__()
         self.shape("turtle")
+        self.reset()
 
     def up(self):
         self.forward(MOVE_DISTANCE)
+
+    def reset(self):
+        self.penup()
+        self.goto(STARTING_POSITION)
+        self.seth(90)
