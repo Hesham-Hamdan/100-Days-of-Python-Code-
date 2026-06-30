@@ -15,3 +15,6 @@ class CarManager(Turtle):
         self.color(choice(COLORS))
         self.shapesize(0.5, 1)
         self.seth(180)
+
+    def move(self):
+        self.forward(self.starting_speed)
