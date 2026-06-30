@@ -15,6 +15,12 @@ class CarManager(Turtle):
         self.color(choice(COLORS))
         self.shapesize(0.5, 1)
         self.seth(180)
+        self.starting_cars_positions()
 
     def move(self):
         self.forward(self.starting_speed)
+
+    def starting_cars_positions(self):
+        random_x = randint(-300, 400)
+        random_y = randint(-250, 250)
+        self.goto(random_x, random_y)
