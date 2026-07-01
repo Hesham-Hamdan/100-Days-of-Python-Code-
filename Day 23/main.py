@@ -10,7 +10,7 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 player = Player()
-
+scoreboard = Scoreboard()
 screen.listen()
 
 cars = []
@@ -22,7 +22,7 @@ for num in range(0, 25):
 
 screen.onkey(key="Up", fun=player.up)
 
-
+level = 1
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
@@ -31,6 +31,9 @@ while game_is_on:
         car.move()
         if car.xcor() < -350:
             car.goto(randint(310, 400), randint(-250, 250))
+        if player.distance(car) < 15:
+            game_is_on = False
+            scoreboard.game_over()
 
 
 screen.exitonclick()
