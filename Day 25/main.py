@@ -20,34 +20,34 @@
 
 import pandas
 
-data = pandas.read_csv("Day 25\weather_data.csv")
-temps = data["temp"]
+# data = pandas.read_csv("Day 25\weather_data.csv")
+# temps = data["temp"]
 
-avg = sum(temps) / len(temps)
-print(avg)
+# avg = sum(temps) / len(temps)
+# print(avg)
 
-maximum = temps.max()
-print(maximum)
+# maximum = temps.max()
+# print(maximum)
 
 
-print(data[data["temp"] == maximum])
+# print(data[data["temp"] == maximum])
 
-monday_temp = data[data["day"] == "Monday"]["temp"][0]
+# monday_temp = data[data["day"] == "Monday"]["temp"][0]
 
-feh = monday_temp * 9 / 5 + 32
-print(feh)
+# feh = monday_temp * 9 / 5 + 32
+# print(feh)
 
 # challenge 3
 
-# data = pandas.read_csv("Day 25\Central-Park-Squirrel-Census-Squirrel-Data.csv")
-# squirrels = {
-#     "Fur Color": ["grey", "red", "black"],
-#     "Count": [
-#         len(data[data["Primary Fur Color"] == "Gray"]),
-#         len(data[data["Primary Fur Color"] == "Cinnamon"]),
-#         len(data[data["Primary Fur Color"] == "Black"]),
-#     ],
-# }
+data = pandas.read_csv("Day 25\Central-Park-Squirrel-Census-Squirrel-Data.csv")
+squirrels = {
+    "Fur Color": ["grey", "red", "black"],
+    "Count": [
+        len(data[data["Primary Fur Color"] == "Gray"]),
+        len(data[data["Primary Fur Color"] == "Cinnamon"]),
+        len(data[data["Primary Fur Color"] == "Black"]),
+    ],
+}
 
-# data2 = pandas.DataFrame(squirrels)
-# data2.to_csv("Day 25\squirrel_count.csv")
+data2 = pandas.DataFrame(squirrels)
+data2.to_csv("Day 25\squirrel_count.csv")
