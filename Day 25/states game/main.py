@@ -33,3 +33,14 @@ while game_is_on:
         t.write(f"{answer_state}", align="left", font=("Arial", 8, "normal"))
         guessed_states.append(answer_state)
         title = f"{len(guessed_states)}/50 States Correct"
+
+not_guessed = {
+    "state": [state for state in data["state"].to_list() if state not in guessed_states]
+}
+# for state in data["state"].to_list():
+#     if state not in guessed_states:
+#         not_guessed["state"].append(state)
+
+
+data2 = pandas.DataFrame(not_guessed)
+data2.to_csv("Day 25\states game\states_to_learn.csv")
