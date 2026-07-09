@@ -19,7 +19,15 @@ while game_is_on:
     answer_state = screen.textinput(
         title=title, prompt="What's another state's name? "
     ).title()
-
-# for state in data["state"].to_list():
-#     if state not in guessed_states:
-#         not_guessed["state"].append(state)
+    state = data[data["state"] == answer_state]
+    if len(state) >= 1:
+        x_cor = max(state["x"])
+        y_cor = max(state["y"])
+        cors = (x_cor, y_cor)
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        t.setpos(cors)
+        t.write(f"{answer_state}", align="left", font=("Arial", 8, "normal"))
+        guessed_states.append(answer_state)
+        title = f"{len(guessed_states)}/50 States Correct"
