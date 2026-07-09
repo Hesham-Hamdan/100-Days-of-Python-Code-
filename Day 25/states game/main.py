@@ -19,6 +19,8 @@ while game_is_on:
     answer_state = screen.textinput(
         title=title, prompt="What's another state's name? "
     ).title()
+    if answer_state == "Exit":
+        break
     state = data[data["state"] == answer_state]
     if len(state) >= 1:
         x_cor = max(state["x"])
