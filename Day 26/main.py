@@ -7,9 +7,18 @@
 
 # Assignment 2
 
-list_of_strings = ["9", "0", "32", "8", "2", "8", "64", "29", "42", "99"]
-nums = [int(num) for num in list_of_strings]
-even_nums = [num for num in nums if num % 2 == 0]
+# list_of_strings = ["9", "0", "32", "8", "2", "8", "64", "29", "42", "99"]
+# nums = [int(num) for num in list_of_strings]
+# even_nums = [num for num in nums if num % 2 == 0]
 
-print(nums)
-print(even_nums)
+# print(nums)
+# print(even_nums)
+
+
+# dict assignments
+
+# Assignment 1
+sentence = "What is the Airspeed Velocity of an Unladen Swallow?"
+words = sentence.split(" ")
+result = {word: len(word) for word in words}
+print(result)
