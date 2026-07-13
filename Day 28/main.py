@@ -19,6 +19,25 @@ timer = None
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 
+def start_timer():
+    global reps
+    reps += 1
+
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+
+    if reps % 8 == 0:
+        count_down(long_break_sec)
+        title_label.config(text="Break", fg=RED)
+    elif reps % 2 == 0:
+        count_down(short_break_sec)
+        title_label.config(text="Break", fg=PINK)
+    else:
+        count_down(work_sec)
+        title_label.config(text="Work", fg=GREEN)
+
+
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
 
@@ -57,7 +76,7 @@ timer_text = canvas.create_text(
 )
 canvas.grid(column=1, row=1)
 
-start_button = Button(text="Start", highlightthickness=0)
+start_button = Button(text="Start", highlightthickness=0, command=start_timer)
 start_button.grid(column=0, row=2)
 
 reset_button = Button(text="Reset", highlightthickness=0)
