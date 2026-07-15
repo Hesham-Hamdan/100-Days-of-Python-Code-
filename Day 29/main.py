@@ -1,5 +1,7 @@
 from tkinter import *
-
+from tkinter import messagebox
+import random
+import pyperclip
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -64,6 +66,25 @@ symbols = ["!", "#", "$", "%", "&", "(", ")", "*", "+"]
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
+def save_password():
+    site = website.get()
+    email = email_username.get()
+    pasrd = password.get()
+
+    if site == "" or pasrd == "":
+        messagebox.showinfo(title="Oops", message="Please don't leave any fields empty")
+    else:
+        is_ok = messagebox.askokcancel(
+            title=website,
+            message=f"These are the detail entered: \nEmail: {email}\nPassword: {pasrd}\n Is it ok to save?",
+        )
+        if is_ok:
+            with open("Day 29/passwords.txt", mode="a") as file:
+                file.write(f"{site} | {email} | {pasrd}\n")
+            website.delete(0, END)
+            password.delete(0, END)
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password Manger")
@@ -89,10 +110,11 @@ password_label.grid(row=3, column=0)
 
 website = Entry(width=35)
 website.grid(row=1, column=1, columnspan=2)
-
+website.focus()
 
 email_username = Entry(width=35)
 email_username.grid(row=2, column=1, columnspan=2)
+email_username.insert(0, "Hello@gmail.com")
 
 password = Entry(width=21)
 password.grid(row=3, column=1)
@@ -100,7 +122,7 @@ password.grid(row=3, column=1)
 generate_password = Button(text="Generate Password")
 generate_password.grid(row=3, column=2)
 
-add = Button(width=36, text="Add")
+add = Button(width=36, text="Add", command=save_password)
 add.grid(row=4, column=1, columnspan=2)
 
 window.mainloop()
