@@ -63,6 +63,28 @@ numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 symbols = ["!", "#", "$", "%", "&", "(", ")", "*", "+"]
 
 
+def generate_password():
+
+    nr_letters = random.randint(8, 10)
+    nr_symbols = random.randint(2, 4)
+    nr_numbers = random.randint(2, 4)
+
+    password_list = (
+        [random.choice(letters) for _ in range(nr_letters)]
+        + [random.choice(symbols) for _ in range(nr_symbols)]
+        + [random.choice(numbers) for _ in range(nr_numbers)]
+    )
+
+    random.shuffle(password_list)
+
+    final_password = "".join(password_list)
+    pyperclip.copy(final_password)
+
+    password.delete(0, END)
+    password.insert(0, final_password)
+
+
+# print(f"Your password is: {password}")
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
@@ -119,7 +141,7 @@ email_username.insert(0, "Hello@gmail.com")
 password = Entry(width=21)
 password.grid(row=3, column=1)
 
-generate_password = Button(text="Generate Password")
+generate_password = Button(text="Generate Password", command=generate_password)
 generate_password.grid(row=3, column=2)
 
 add = Button(width=36, text="Add", command=save_password)
