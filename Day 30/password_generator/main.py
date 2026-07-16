@@ -65,6 +65,38 @@ numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 symbols = ["!", "#", "$", "%", "&", "(", ")", "*", "+"]
 
 
+# ---------------------------- SAVE PASSWORD ------------------------------- #
+
+
+def save_password():
+    site = website.get()
+    email = email_username.get()
+    pasrd = password.get()
+    new_data = {site: {"email": email, "password": pasrd}}
+
+    def write_file(data):
+        with open("Day 30\password_generator\passwords.json", mode="w") as file:
+            json.dump(data, file, indent=4)
+            website.delete(0, END)
+            password.delete(0, END)
+
+    if site == "" or pasrd == "":
+        messagebox.showinfo(title="Oops", message="Please don't leave any fields empty")
+    else:
+        try:
+            with open("Day 30\password_generator\passwords.json", mode="r") as file:
+                data = json.load(file)
+                data.update(new_data)
+        except FileNotFoundError:
+            write_file(new_data)
+
+        else:
+            write_file(data)
+
+
+# ---------------------------- Search for password ------------------------------- #
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password Manger")
@@ -102,7 +134,7 @@ password.grid(row=3, column=1)
 generate_password = Button(text="Generate Password")
 generate_password.grid(row=3, column=2)
 
-add = Button(width=36, text="Add")
+add = Button(width=36, text="Add", command=save_password)
 add.grid(row=4, column=1, columnspan=2)
 
 search = Button(text="Search")
