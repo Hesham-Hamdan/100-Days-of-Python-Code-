@@ -117,6 +117,24 @@ def save_password():
 
 
 # ---------------------------- Search for password ------------------------------- #
+def search():
+    site = website.get()
+    if site == "":
+        messagebox.showinfo(title="Oops", message="Please enter the website")
+        return
+    try:
+        with open("Day 30\password_generator\passwords.json", mode="r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No Data File Found")
+    else:
+        if site in data:
+            messagebox.showinfo(
+                title=f"{site}",
+                message=f"Email:{data[site]['email']}\nPassword:{data[site]['password']}",
+            )
+        else:
+            messagebox.showinfo(title="Error", message="No Such website found")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -159,7 +177,7 @@ generate_password.grid(row=3, column=2)
 add = Button(width=36, text="Add", command=save_password)
 add.grid(row=4, column=1, columnspan=2)
 
-search = Button(text="Search")
+search = Button(text="Search", command=search)
 search.grid(row=1, column=2)
 
 window.mainloop()
