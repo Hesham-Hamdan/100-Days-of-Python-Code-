@@ -26,3 +26,21 @@ sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
 print(sunset)
 print(sunrise)
+
+time_now = datetime.now()
+# print(time_now.hour)
+
+
+def check_position(lat, lng):
+    if abs(lat - MY_LAT) <= 5 and abs(lng - MY_LONG) <= 5:
+        return True
+    else:
+        return False
+
+
+if check_position(latitude, longitude) and (
+    time_now.hour > sunset or time_now.hour < sunrise
+):
+    print("it's here")
+else:
+    print("Oh no it's far from here")
