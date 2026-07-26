@@ -24,4 +24,14 @@ class QuizzInterface:
             fill=THEME_COLOR,
         )
 
+        true_image = PhotoImage(file="Day 34/images/true.png")
+        false_image = PhotoImage(file="Day 34/images/false.png")
+
+        self.right_button = Button(image=true_image, highlightthickness=0)
+        self.right_button.grid(row=2, column=0, pady=20)
+        self.wrong_button = Button(image=false_image, highlightthickness=0)
+        self.wrong_button.grid(row=2, column=1, pady=20)
+
+        self.next_question()
+
         self.window.mainloop()
