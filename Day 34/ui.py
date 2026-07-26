@@ -35,3 +35,12 @@ class QuizzInterface:
         self.next_question()
 
         self.window.mainloop()
+
+    def next_question(self):
+        self.canvas.config(bg="white")
+        try:
+            self.canvas.itemconfig(self.text, text=self.quiz.next_question())
+        except IndexError:
+            self.canvas.itemconfig(self.text, text="You ran out of questions")
+            self.right_button.config(state="disabled")
+            self.wrong_button.config(state="disabled")
