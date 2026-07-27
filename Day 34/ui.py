@@ -32,7 +32,7 @@ class QuizzInterface:
         )
         self.right_button.grid(row=2, column=0, pady=20)
         self.wrong_button = Button(
-            image=false_image, highlightthickness=0
+            image=false_image, highlightthickness=0, command=self.answer_false
         )
         self.wrong_button.grid(row=2, column=1, pady=20)
 
@@ -52,7 +52,8 @@ class QuizzInterface:
     def answer_true(self):
         self.give_feedback(self.quiz.check_answer("True"))
 
-    
+    def answer_false(self):
+        self.give_feedback(self.quiz.check_answer("False"))
 
     def give_feedback(self, is_right):
         if is_right:
