@@ -27,9 +27,13 @@ class QuizzInterface:
         true_image = PhotoImage(file="Day 34/images/true.png")
         false_image = PhotoImage(file="Day 34/images/false.png")
 
-        self.right_button = Button(image=true_image, highlightthickness=0)
+        self.right_button = Button(
+            image=true_image, highlightthickness=0
+        )
         self.right_button.grid(row=2, column=0, pady=20)
-        self.wrong_button = Button(image=false_image, highlightthickness=0)
+        self.wrong_button = Button(
+            image=false_image, highlightthickness=0
+        )
         self.wrong_button.grid(row=2, column=1, pady=20)
 
         self.next_question()
@@ -44,3 +48,13 @@ class QuizzInterface:
             self.canvas.itemconfig(self.text, text="You ran out of questions")
             self.right_button.config(state="disabled")
             self.wrong_button.config(state="disabled")
+
+   
+
+    def give_feedback(self, is_right):
+        if is_right:
+            self.canvas.config(self.canvas, bg="green")
+            self.scoreboard.config(text=f"Score: {self.quiz.score}")
+        else:
+            self.canvas.config(self.canvas, bg="red")
+        self.window.after(1000, self.next_question)
