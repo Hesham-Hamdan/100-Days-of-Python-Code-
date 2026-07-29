@@ -29,3 +29,30 @@ difference_precentage = (yesterday_price - theday_before_price) / yesterday_pric
 
 print(difference_precentage)
 
+## STEP 2: Use https://newsapi.org
+# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+
+
+if difference_precentage <= -5 or difference_precentage >= 5:
+    news_parameters = {
+        "qInTitle": COMPANY_NAME,
+        "from": "2026-06-31",
+        "sortBy": "publishedAt",
+        "apiKey": "afa580b6630f491d833e03fb936a5f94",
+    }
+    news_response = requests.get(NEWS_API, params=news_parameters)
+    news_data = news_response.json()
+    news_pieces = [news_data["articles"][num] for num in range(0, 3)]
+    if difference_precentage > 0:
+        body = f"🔺{round(difference_precentage)}"
+    elif difference_precentage < 0:
+        body = f"🔺{round(-difference_precentage)}"
+
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+        body=f"TSLA: {body}%\nHeadline: {news_pieces[0]['title']}\nBrief: {news_pieces[0]['description']}",
+        from_="YOUR TWILIO VIRTUAL NUMBER",
+        to="YOUR TWILIO VERIFIED REAL NUMBER",
+    )
+    print(message.status)
+
