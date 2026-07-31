@@ -38,7 +38,17 @@ today = datetime(year=2026, month=7, day=5)
 
 pixel_config = {"date": today.strftime("%Y%m%d"), "quantity": "1550"}
 
-response = requests.post(url=pixel_endpoint, json=pixel_config, headers=headers)
+# response = requests.post(url=pixel_endpoint, json=pixel_config, headers=headers)
+# print(response.text)
+
+updating_pixel_endpoint = f"{pixel_endpoint}/{today.strftime('%Y%m%d')}"
+
+updating_pixel_config = {"quantity": "1250"}
+
+response = requests.put(
+    url=updating_pixel_endpoint, json=updating_pixel_config, headers=headers
+)
 print(response.text)
+
 
 
