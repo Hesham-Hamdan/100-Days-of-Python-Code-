@@ -21,3 +21,10 @@ params = {
 }
 
 headers = {"x-app-id": API_ID, "x-app-key": API_KEY}
+
+response = requests.post(API_ENDPOINT, json=params, headers=headers)
+data = response.json()
+exercise = data["exercises"][0]["name"]
+duration = data["exercises"][0]["duration_min"]
+calories = data["exercises"][0]["nf_calories"]
+today = dt.now()
