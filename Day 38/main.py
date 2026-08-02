@@ -28,3 +28,17 @@ exercise = data["exercises"][0]["name"]
 duration = data["exercises"][0]["duration_min"]
 calories = data["exercises"][0]["nf_calories"]
 today = dt.now()
+
+body = {
+    "workout": {
+        "date": f"{today.strftime('%Y/%m/%d')}",
+        "time": f"{today.strftime('%H:%M:%S')}",
+        "exercise": exercise.capitalize(),
+        "duration": duration,
+        "calories": calories,
+    }
+}
+
+sheety_headers = {"Authorization": f"Bearer {TOKEN}"}
+
+sheety_response = requests.post(SHEETY_ENDPOINT, json=body, headers=sheety_headers)
