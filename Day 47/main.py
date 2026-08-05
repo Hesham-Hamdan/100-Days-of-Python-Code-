@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 import requests
 
 headers = {
@@ -6,3 +7,7 @@ headers = {
 
 response = requests.get("https://appbrewery.github.io/instant_pot/", headers=headers)
 empire_webpage = response.text
+
+soup = BeautifulSoup(empire_webpage, "html.parser")
+price = f'{soup.select_one(".a-price-whole").getText()}{soup.select_one(".a-price-fraction").getText()}'
+print(price)
