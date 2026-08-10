@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -27,3 +28,49 @@ email_field = driver.find_element(By.ID, "email-input")
 email_field.send_keys(ACCOUNT_EMAIL)
 password_field = driver.find_element(By.ID, "password-input")
 password_field.send_keys(ACCOUNT_PASSWORD, Keys.ENTER)
+
+
+# step 3, 4, 5
+
+already_booked_or_joined = 0
+classes_booked = 0
+wailists_joined = 0
+
+
+time.sleep(1)
+div_parent = driver.find_element(By.CSS_SELECTOR, "[id*='tue']")
+h2 = div_parent.find_element(By.CSS_SELECTOR, "h2").text
+div_wrapper = div_parent.find_element(By.CSS_SELECTOR, "[id$='-1800']")
+class_type = div_wrapper.find_element(By.CSS_SELECTOR, "h3").text
+book_button = div_wrapper.find_element(By.TAG_NAME, "button")
+
+if book_button.text == "Booked":
+    print(f"✓ Already booked: {class_type} on {h2}")
+    already_booked_or_joined += 1
+elif book_button.text == "Waitlisted":
+    print(f"✓ Already on waitlist: {class_type} on {h2}")
+    already_booked_or_joined += 1
+else:
+    try:
+        book_button.click()
+        time.sleep(1)
+    except Exception:
+        driver.execute_script("arguments[0].click();", book_button)
+        time.sleep(1)
+    finally:
+        if book_button.text == "Booked":
+            print(f"✓ Booked: {class_type} on {h2}")
+            classes_booked += 1
+
+        else:
+            print(f"✓ Joined waitlist for: {class_type} on {h2}")
+            wailists_joined += 1
+
+
+print("\n--- BOOKING SUMMARY ---")
+print(f"Classes booked: {classes_booked}")
+print(f"Waitlists joined: {wailists_joined}")
+print(f"Already booked/waitlisted: {already_booked_or_joined}")
+print(
+    f"Total Tuesday & Thursday 6pm classes processed: {classes_booked + wailists_joined + already_booked_or_joined}"
+)
