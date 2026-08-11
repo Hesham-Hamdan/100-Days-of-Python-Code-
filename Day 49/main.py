@@ -30,15 +30,40 @@ password_field = driver.find_element(By.ID, "password-input")
 password_field.send_keys(ACCOUNT_PASSWORD, Keys.ENTER)
 
 
-# step 6
+# step 7
 
 days = ["tue", "thu"]
 new_bookings = []
 new_waitlists = []
 
-already_booked_or_joined = 0
+already_booked = 0
+already_joined = 0
 classes_booked = 0
 wailists_joined = 0
+
+
+def verify_bookings(num_of_bookings, container_divs_id):
+    if num_of_bookings > 0:
+        my_bookings_button = driver.find_element(By.ID, "my-bookings-link")
+        my_bookings_button.click()
+        container_divs = driver.find_element(By.ID, container_divs_id).find_elements(
+            By.CSS_SELECTOR, "div [id*='card']"
+        )
+        print("--- VERIFYING ON MY BOOKINGS PAGE ---")
+
+        for div in container_divs:
+            class_type = div.find_element(By.CSS_SELECTOR, "div h3").text
+            # class_time = div.find_element(By.CSS_SELECTOR, "div p").text
+            print(f"✓ Verified: {class_type}")
+        print("--- VERIFICATION RESULT ---")
+        print(f"Expected: {num_of_bookings} bookings")
+        print(f"Found: {len(container_divs)} bookings")
+        if num_of_bookings == len(container_divs):
+            print("✅ SUCCESS: All bookings verified!")
+        else:
+            print(
+                f"❌ MISMATCH: Missing {num_of_bookings - len(container_divs)} bookings"
+            )
 
 
 for day in days:
@@ -51,10 +76,10 @@ for day in days:
 
     if book_button.text == "Booked":
         print(f"✓ Already booked: {class_type} on {h2}")
-        already_booked_or_joined += 1
+        already_booked += 1
     elif book_button.text == "Waitlisted":
         print(f"✓ Already on waitlist: {class_type} on {h2}")
-        already_booked_or_joined += 1
+        already_joined += 1
     else:
         try:
             book_button.click()
@@ -76,13 +101,11 @@ for day in days:
 print("\n--- BOOKING SUMMARY ---")
 print(f"Classes booked: {classes_booked}")
 print(f"Waitlists joined: {wailists_joined}")
-print(f"Already booked/waitlisted: {already_booked_or_joined}")
+print(f"Already booked/waitlisted: {already_booked+already_joined}")
 print(
-    f"Total Tuesday & Thursday 6pm classes processed: {classes_booked + wailists_joined + already_booked_or_joined}"
+    f"Total Tuesday & Thursday 6pm classes processed: {classes_booked + wailists_joined +already_booked+already_joined}"
 )
 
-print("--- DETAILED CLASS LIST ---")
-for booking in new_bookings:
-    print(f"[New Booking] {booking}")
-for waitlist in new_waitlists:
-    print(f"[New Waitlist] {waitlist}")
+
+verify_bookings(classes_booked + already_booked, "confirmed-bookings-section")
+verify_bookings(wailists_joined + already_joined, "waitlist-section")
