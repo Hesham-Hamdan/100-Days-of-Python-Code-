@@ -30,41 +30,47 @@ password_field = driver.find_element(By.ID, "password-input")
 password_field.send_keys(ACCOUNT_PASSWORD, Keys.ENTER)
 
 
-# step 3, 4, 5
+# step 6
+
+days = ["tue", "thu"]
+new_bookings = []
+new_waitlists = []
 
 already_booked_or_joined = 0
 classes_booked = 0
 wailists_joined = 0
 
 
-time.sleep(1)
-div_parent = driver.find_element(By.CSS_SELECTOR, "[id*='tue']")
-h2 = div_parent.find_element(By.CSS_SELECTOR, "h2").text
-div_wrapper = div_parent.find_element(By.CSS_SELECTOR, "[id$='-1800']")
-class_type = div_wrapper.find_element(By.CSS_SELECTOR, "h3").text
-book_button = div_wrapper.find_element(By.TAG_NAME, "button")
+for day in days:
+    time.sleep(1)
+    div_parent = driver.find_element(By.CSS_SELECTOR, f"[id*='{day}']")
+    h2 = div_parent.find_element(By.CSS_SELECTOR, "h2").text
+    div_wrapper = div_parent.find_element(By.CSS_SELECTOR, "[id$='-1800']")
+    class_type = div_wrapper.find_element(By.CSS_SELECTOR, "h3").text
+    book_button = div_wrapper.find_element(By.TAG_NAME, "button")
 
-if book_button.text == "Booked":
-    print(f"✓ Already booked: {class_type} on {h2}")
-    already_booked_or_joined += 1
-elif book_button.text == "Waitlisted":
-    print(f"✓ Already on waitlist: {class_type} on {h2}")
-    already_booked_or_joined += 1
-else:
-    try:
-        book_button.click()
-        time.sleep(1)
-    except Exception:
-        driver.execute_script("arguments[0].click();", book_button)
-        time.sleep(1)
-    finally:
-        if book_button.text == "Booked":
-            print(f"✓ Booked: {class_type} on {h2}")
-            classes_booked += 1
-
-        else:
-            print(f"✓ Joined waitlist for: {class_type} on {h2}")
-            wailists_joined += 1
+    if book_button.text == "Booked":
+        print(f"✓ Already booked: {class_type} on {h2}")
+        already_booked_or_joined += 1
+    elif book_button.text == "Waitlisted":
+        print(f"✓ Already on waitlist: {class_type} on {h2}")
+        already_booked_or_joined += 1
+    else:
+        try:
+            book_button.click()
+            time.sleep(1)
+        except Exception:
+            driver.execute_script("arguments[0].click();", book_button)
+            time.sleep(1)
+        finally:
+            if book_button.text == "Booked":
+                print(f"✓ Booked: {class_type} on {h2}")
+                classes_booked += 1
+                new_bookings.append(f"{class_type} on {h2}")
+            else:
+                print(f"✓ Joined waitlist for: {class_type} on {h2}")
+                wailists_joined += 1
+                new_waitlists.append(f"{class_type} on {h2}")
 
 
 print("\n--- BOOKING SUMMARY ---")
@@ -74,3 +80,9 @@ print(f"Already booked/waitlisted: {already_booked_or_joined}")
 print(
     f"Total Tuesday & Thursday 6pm classes processed: {classes_booked + wailists_joined + already_booked_or_joined}"
 )
+
+print("--- DETAILED CLASS LIST ---")
+for booking in new_bookings:
+    print(f"[New Booking] {booking}")
+for waitlist in new_waitlists:
+    print(f"[New Waitlist] {waitlist}")
