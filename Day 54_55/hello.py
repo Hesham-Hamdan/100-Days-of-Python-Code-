@@ -10,8 +10,16 @@ def make_bold(func):
     return wrapper_function
 
 
+def make_emphasis(func):
+    def wrapper_function():
+        return f"<em>{func()}</em>"
+
+    return wrapper_function
+
+
 @app.route("/")
 @make_bold
+@make_emphasis
 def hello_world():
     return "hi people"
 
