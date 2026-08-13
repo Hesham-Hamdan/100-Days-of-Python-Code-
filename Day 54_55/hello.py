@@ -17,9 +17,17 @@ def make_emphasis(func):
     return wrapper_function
 
 
+def make_underlined(func):
+    def wrapper_function():
+        return f"<u>{func()}</u>"
+
+    return wrapper_function
+
+
 @app.route("/")
 @make_bold
 @make_emphasis
+@make_underlined
 def hello_world():
     return "hi people"
 
