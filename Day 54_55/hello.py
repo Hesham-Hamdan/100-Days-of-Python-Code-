@@ -3,6 +3,15 @@ from flask import Flask
 app = Flask(__name__)
 
 
+def make_bold(func):
+    def wrapper_function():
+        return f"<b>{func()}</b>"
+
+    return wrapper_function
+
+
+@app.route("/")
+@make_bold
 def hello_world():
     return "hi people"
 
